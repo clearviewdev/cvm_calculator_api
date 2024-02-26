@@ -1,11 +1,11 @@
-import { Router } from 'express';
-import {
+const { Router } = require('express');
+const {
   createPolicy,
   getPolicy,
   updatePolicy,
   deletePolicy,
-} from '../controllers/policyController.js';
-import { authenticate } from '../middleware/authentication.js';
+} = require('../controllers/policyController.js');
+const { authenticate } = require('../middleware/authentication.js');
 
 const router = Router();
 
@@ -16,4 +16,4 @@ router.use(authenticate);
 router.post('/', createPolicy);
 router.route('/:id').put(updatePolicy).delete(deletePolicy);
 
-export default router;
+module.exports = router;

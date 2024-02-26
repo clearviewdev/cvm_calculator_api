@@ -1,7 +1,7 @@
-import { formatData, validateData } from '../service/policyService.js';
-import Criterion from '../model/criterionSchema.js';
+const { formatData, validateData } = require('../service/policyService.js');
+const Criterion = require('../model/criterionSchema.js');
 
-export async function getPolicy(req, res) {
+async function getPolicy(req, res) {
   try {
     const criterion = await Criterion.find();
     res.status(200).json({
@@ -18,7 +18,7 @@ export async function getPolicy(req, res) {
   }
 }
 
-export async function createPolicy(req, res) {
+async function createPolicy(req, res) {
   try {
     validateData(req.body, true);
     const newCriterion = formatData(req.body, true);
@@ -37,7 +37,7 @@ export async function createPolicy(req, res) {
   }
 }
 
-export async function updatePolicy(req, res) {
+async function updatePolicy(req, res) {
   try {
     const id = req.params?.id;
     validateData(req.body);
@@ -61,7 +61,7 @@ export async function updatePolicy(req, res) {
   }
 }
 
-export async function deletePolicy(req, res) {
+async function deletePolicy(req, res) {
   try {
     const id = req.params?.id;
     await Criterion.findByIdAndDelete(id);
@@ -78,3 +78,10 @@ export async function deletePolicy(req, res) {
     });
   }
 }
+
+module.exports = {
+  getPolicy,
+  createPolicy,
+  updatePolicy,
+  deletePolicy
+};

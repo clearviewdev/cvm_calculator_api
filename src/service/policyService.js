@@ -1,6 +1,6 @@
-import { POLICY_NAMES, THRESHOLD_REQUIRED } from '../constants/policy.js';
+const { POLICY_NAMES, THRESHOLD_REQUIRED } = require('../constants/policy.js');
 
-export function validateData(data, isCreate) {
+function validateData(data, isCreate) {
   if (!data.name && isCreate) {
     throw new Error('Policy name must be provided.');
   }
@@ -22,7 +22,7 @@ export function validateData(data, isCreate) {
   }
 }
 
-export function formatData(data, isCreate) {
+function formatData(data, isCreate) {
   const formattedData = {};
   if (!!isCreate) {
     formattedData.name = data.name;
@@ -40,3 +40,8 @@ export function formatData(data, isCreate) {
 
   return formattedData;
 }
+
+module.exports = {
+  validateData,
+  formatData
+};

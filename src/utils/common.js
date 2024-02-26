@@ -1,7 +1,7 @@
-import { createHash } from 'crypto';
+const { createHash } = require('crypto');
 const SECRET = process.env.SECRET;
 
-export async function checkAuth(request) {
+async function checkAuth(request) {
   const algorithm = 'sha256'; // Use lowercase algorithm name
   const str = SECRET + JSON.stringify(request);
 
@@ -10,3 +10,7 @@ export async function checkAuth(request) {
 
   return hash.digest('hex');
 }
+
+module.exports = {
+  checkAuth
+};

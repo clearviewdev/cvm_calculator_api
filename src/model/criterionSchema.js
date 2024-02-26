@@ -1,5 +1,5 @@
-import { Schema, model } from 'mongoose';
-import { POLICY_NAMES } from '../constants/policy.js';
+const { Schema, model } = require('mongoose');
+const { POLICY_NAMES } = require('../constants/policy.js');
 
 const criterionSchema = Schema(
   {
@@ -23,4 +23,4 @@ const criterionSchema = Schema(
   { timestamps: true }
 );
 
-export default model('Criterion', criterionSchema);
+module.exports = model('Criterion', criterionSchema);
