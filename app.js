@@ -16,9 +16,10 @@ dbConnect();
 
 app.use('/api/policy', policy);
 
-app.use('/', (req, res, next) => {
-  res.status(200).send('<h1>Server Health Ok.</h1>');
+app.get('/', (req, res) => {
+  res.send('<h1>Welcome to My App</h1>');
 });
+
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
