@@ -9,10 +9,11 @@ const { authenticate } = require('../middleware/authentication.js');
 
 const router = Router();
 
-router.route('/').get(getPolicy);
-
+// Authentication middleware applied to all routes below
 router.use(authenticate);
 
+// Routes
+router.route('/').get(getPolicy);
 router.post('/', createPolicy);
 router.route('/:id').put(updatePolicy).delete(deletePolicy);
 
