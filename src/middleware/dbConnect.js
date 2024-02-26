@@ -1,10 +1,10 @@
-require('dotenv').config();
-const mongoose = require('mongoose');
+require("dotenv").config();
+const mongoose = require("mongoose");
 
 async function dbConnect() {
   try {
     await connectToDatabase();
-    console.log('Database Connected Successfully');
+    console.log("Database Connected Successfully");
   } catch (error) {
     console.error(error.message);
     process.exit(1);
