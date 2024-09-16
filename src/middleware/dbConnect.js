@@ -1,20 +1,21 @@
-require("dotenv").config();
-const mongoose = require("mongoose");
+import 'dotenv/config';
+import { connect } from 'mongoose';
 
-async function dbConnect() {
-  try {
-    await connectToDatabase();
-    console.log("Database Connected Successfully");
-  } catch (error) {
-    console.error(error.message);
-    process.exit(1);
-  }
+function dbConnect() {
+  connectToDatabase()
+    .then(() => {
+      console.log('Database Connected Successfully');
+    })
+    .catch((error) => {
+      console.error(error.message);
+      process.exit(1);
+    });
 }
 
 const connectToDatabase = () => {
-  return mongoose.connect(process.env.DATABASE_URL, {
+  return connect(process.env.DATABASE_URL, {
     autoIndex: true,
   });
 };
 
-module.exports = dbConnect;
+export default dbConnect;

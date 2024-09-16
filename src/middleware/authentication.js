@@ -1,22 +1,18 @@
 // middleware/auth.js
 
-const { checkAuth } = require("../utils/common.js");
+import { checkAuth } from '../utils/common.js';
 
 // Authentication for all protected API routes.
-async function authenticate(req, res, next) {
+export async function authenticate(req, res, next) {
   try {
     const checksum = await checkAuth(req.body);
     // Use req.header('authorization') directly and compare without converting to lowercase
-    if (checksum === req.header("authorization")) {
+    if (checksum === req.header('authorization')) {
       next();
     } else {
-      res.status(403).send("You do not have permission to access this route.");
+      res.status(403).send('You do not have permission to access this route.');
     }
   } catch (err) {
     next(err);
   }
 }
-
-module.exports = {
-  authenticate,
-};

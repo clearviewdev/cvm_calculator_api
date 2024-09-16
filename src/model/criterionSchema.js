@@ -1,5 +1,5 @@
-const { Schema, model } = require('mongoose');
-const { POLICY_NAMES } = require('../constants/policy.js');
+import { Schema, model } from 'mongoose';
+import { POLICY_NAMES } from '../constants/policy.js';
 
 const criterionSchema = Schema(
   {
@@ -9,6 +9,7 @@ const criterionSchema = Schema(
       enum: Object.values(POLICY_NAMES),
       immutable: true,
     },
+    field: { type: Schema.Types.ObjectId, ref: 'Field' },
     threshold: {
       type: String,
     },
@@ -23,4 +24,4 @@ const criterionSchema = Schema(
   { timestamps: true }
 );
 
-module.exports = model('Criterion', criterionSchema);
+export default model('Criterion', criterionSchema);

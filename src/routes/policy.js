@@ -1,19 +1,19 @@
-const { Router } = require("express");
-const {
+import { Router } from 'express';
+import {
   createPolicy,
   getPolicy,
   updatePolicy,
   deletePolicy,
-} = require("../controllers/policyController.js");
-const { authenticate } = require("../middleware/authentication.js");
+} from '../controllers/policyController.js';
+import { authenticate } from '../middleware/authentication.js';
 
 const router = Router();
-router.route("/").get(getPolicy);
-// Authentication middleware applied to all routes below
+
+router.route('/').get(getPolicy);
+
 router.use(authenticate);
 
-// Routes
-router.post("/", createPolicy);
-router.route("/:id").put(updatePolicy).delete(deletePolicy);
+router.post('/', createPolicy);
+router.route('/:id').put(updatePolicy).delete(deletePolicy);
 
-module.exports = router;
+export default router;

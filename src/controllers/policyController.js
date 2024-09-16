@@ -1,9 +1,11 @@
-const { formatData, validateData } = require('../service/policyService.js');
-const Criterion = require('../model/criterionSchema.js');
+import { formatData, validateData } from '../service/policyService.js';
+import Criterion from '../model/criterionSchema.js';
+import { FIELD_REQUIRED } from '../constants/policy.js';
+import Field from '../model/field.js';
 
-async function getPolicy(req, res) {
+export async function getPolicy(req, res) {
   try {
-    const criterion = await Criterion.find();
+    const criterion = await Criterion.find().populate('field');
     res.status(200).json({
       success: true,
       message: 'Data fetched successfully.',
@@ -18,10 +20,18 @@ async function getPolicy(req, res) {
   }
 }
 
-async function createPolicy(req, res) {
+export async function createPolicy(req, res) {
   try {
     validateData(req.body, true);
     const newCriterion = formatData(req.body, true);
+    if (FIELD_REQUIRED.includes(newCriterion.name)) {
+      const field = await Field.findOne({
+        originalName: newCriterion.name,
+      }).exec();
+      console.log('FFFFF', field);
+      if (!field) throw new Error('No Field found. Field required.');
+      newCriterion.field = field._id;
+    }
     const criterion = await Criterion.create(newCriterion);
     res.status(200).json({
       success: true,
@@ -37,7 +47,7 @@ async function createPolicy(req, res) {
   }
 }
 
-async function updatePolicy(req, res) {
+export async function updatePolicy(req, res) {
   try {
     const id = req.params?.id;
     validateData(req.body);
@@ -61,7 +71,7 @@ async function updatePolicy(req, res) {
   }
 }
 
-async function deletePolicy(req, res) {
+export async function deletePolicy(req, res) {
   try {
     const id = req.params?.id;
     await Criterion.findByIdAndDelete(id);
@@ -78,10 +88,3 @@ async function deletePolicy(req, res) {
     });
   }
 }
-
-module.exports = {
-  getPolicy,
-  createPolicy,
-  updatePolicy,
-  deletePolicy
-};
