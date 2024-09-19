@@ -1,12 +1,8 @@
-// middleware/auth.js
-
 import { checkAuth } from '../utils/common.js';
 
-// Authentication for all protected API routes.
 export async function authenticate(req, res, next) {
   try {
     const checksum = await checkAuth(req.body);
-    // Use req.header('authorization') directly and compare without converting to lowercase
     if (checksum === req.header('authorization')) {
       next();
     } else {
@@ -16,3 +12,8 @@ export async function authenticate(req, res, next) {
     next(err);
   }
 }
+
+//* DEV auth implementation
+// export async function authenticate(req, res, next) {
+//   next();
+// }

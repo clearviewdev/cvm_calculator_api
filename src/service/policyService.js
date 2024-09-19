@@ -17,7 +17,11 @@ export function validateData(data, isCreate) {
     throw new Error('Policy points must be provided.');
   }
 
-  if (data.name === POLICY_NAMES.POINT_SCALE && !data.nonHraPoints) {
+  if (
+    (data.name === POLICY_NAMES.INBOUND_POINT_SCALE ||
+      data.name === POLICY_NAMES.OUTBOUND_POINT_SCALE) &&
+    !data.nonHraPoints
+  ) {
     throw new Error('Policy non HRA value must be provided.');
   }
 }
@@ -38,7 +42,10 @@ export function formatData(data, isCreate) {
     formattedData.threshold = data.threshold;
   }
 
-  if (data.name === POLICY_NAMES.POINT_SCALE) {
+  if (
+    data.name === POLICY_NAMES.INBOUND_POINT_SCALE ||
+    data.name === POLICY_NAMES.OUTBOUND_POINT_SCALE
+  ) {
     formattedData.nonHraPoints = data.nonHraPoints;
   }
 

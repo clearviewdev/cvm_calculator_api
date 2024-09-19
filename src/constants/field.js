@@ -1,12 +1,12 @@
-import { POLICY_NAMES } from './policy.js';
+import { POLICY_NAMES } from "./policy.js";
 
 export const FieldNames = {
-  policyWithHRA: 'policyWithHRA',
-  totalVBC: 'totalVBC',
-  totalHRA: 'totalHRA',
-  totalReferalSalesInBound: 'totalReferalSalesinbound',
-  totalReferalSalesOutBound: 'totalReferalSalesOutBound',
-  policyWithoutHRA: 'policyWithoutHRA',
+  policyWithHRA: "policyWithHRA",
+  totalVBC: "totalVBC",
+  totalHRA: "totalHRA",
+  totalReferalSalesInBound: "totalReferalSalesinbound",
+  totalReferalSalesOutBound: "totalReferalSalesOutBound",
+  policyWithoutHRA: "policyWithoutHRA",
 };
 
 export const FieldOriginalName = [

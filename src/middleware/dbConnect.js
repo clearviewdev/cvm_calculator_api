@@ -7,7 +7,7 @@ function dbConnect() {
       console.log('Database Connected Successfully');
     })
     .catch((error) => {
-      console.error(error.message);
+      console.error('Mongo ERROR => ', error.message);
       process.exit(1);
     });
 }
